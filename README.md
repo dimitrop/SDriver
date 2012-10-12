@@ -8,4 +8,6 @@ For preventing this kind of attacks we have implemented SDriver. SDriver/SQL is 
 To detect an attack, the driver uses stripped-down SQL queries and stack traces to create SQL statement
 signatures that are then used to distinguish between injected and legitimate queries. The driver depends
 neither on the application nor on the rdbms and can be easily retroﬁtted to any system. For more check the
-corresponding publication
+corresponding publication:
+
+http://www.dmst.aueb.gr/dds/pubs/jrnl/2009-CompSec-SQLIA/html/sqlia.html
