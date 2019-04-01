@@ -75,42 +75,42 @@ public class SStatement implements java.sql.Statement{
         numbers = Pattern.compile("([<=>,\\(]+\\s*)(?:[0-9A-Fa-f])+");
         comments = Pattern.compile("/\\*(?:.|[\\n\\r])*?\\*/");
         //please make a connection with ssql DB
+	try {
 		try {
-			try {
-				Class.forName("org.gjt.mm.mysql.Driver").newInstance();
-			} catch (InstantiationException e2) {
-				e2.printStackTrace();
-			} catch (IllegalAccessException e2) {
-				e2.printStackTrace();
-			}
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
+			Class.forName("org.gjt.mm.mysql.Driver").newInstance();
+		} catch (InstantiationException e2) {
+			e2.printStackTrace();
+		} catch (IllegalAccessException e2) {
+			e2.printStackTrace();
 		}
-		Connection pass2 = null;
-		try {
-			pass2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ssql","root","");
-		} catch (SQLException sqle) {
+	} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+	}
+	Connection pass2 = null;
+	try {
+		pass2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/ssql","root","");
+	} catch (SQLException sqle) {
             System.err.println("Could not connect with ssql DB" 
                     + sqle.getMessage());
 			sqle.printStackTrace();
-		}
+	}
 
-		try {
-			statement2 = pass2.createStatement();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+	try {
+		statement2 = pass2.createStatement();
+	} catch (SQLException e1) {
+		e1.printStackTrace();
+	}
 
-		ResultSet rs = null;
+	ResultSet rs = null;
         try {
-			rs = statement2.executeQuery("SELECT * FROM signatures");
-			while (rs.next()) {
-				mapID.put( rs.getString(1), null );
-			}
+		rs = statement2.executeQuery("SELECT * FROM signatures");
+		while (rs.next()) {
+			mapID.put( rs.getString(1), null );
+		}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}     
-    }
+    	}
  
 	SStatement(SConnection conn, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
 		this.resultSetType = resultSetType;
